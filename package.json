@@ -1,0 +1,72 @@
+{
+  "name": "gulp-san-ssr",
+  "version": "0.0.1",
+  "discription": "gulp-san-ssr",
+  "scripts": {
+    "version": "npm run lint && npm run build",
+    "lint": "eslint 'src/**/*.ts'",
+    "test": "exit 0",
+    "build": "tsc",
+    "watch": "tsc --watch",
+    "commit": "git-cz",
+    "semantic-release": "semantic-release"
+  },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-conventional-changelog"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/searchfe/gulp-san-ssr"
+  },
+  "homepage": "https://github.com/searchfe/gulp-san-ssr",
+  "devDependencies": {
+    "@semantic-release/changelog": "^3.0.2",
+    "@semantic-release/commit-analyzer": "^6.1.0",
+    "@semantic-release/git": "^7.0.8",
+    "@semantic-release/npm": "^5.1.7",
+    "@semantic-release/release-notes-generator": "^7.1.4",
+    "@types/node": "^10.14.1",
+    "@typescript-eslint/eslint-plugin": "^2.3.0",
+    "@typescript-eslint/parser": "^2.3.0",
+    "eslint": "^5.16.0",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-import": "^2.15.0",
+    "eslint-plugin-node": "^9.1.0",
+    "eslint-plugin-promise": "^4.1.1",
+    "eslint-plugin-standard": "^4.0.0",
+    "san-ssr": "^1.0.0",
+    "semantic-release": "^15.13.27",
+    "typescript": "^3.1.6"
+  },
+  "release": {
+    "branch": "master",
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      "@semantic-release/changelog",
+      "@semantic-release/npm",
+      "@semantic-release/git"
+    ]
+  },
+  "dependencies": {
+    "plugin-error": "^1.0.1",
+    "through2": "^3.0.1"
+  },
+  "peerDependencies": {
+    "san-ssr": "*"
+  },
+  "engines": {
+    "node": ">= 6.0.x"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "license": "MIT",
+  "author": "harttle <yangjvn@126.com>",
+  "files": [
+    "dist",
+    "*.json",
+    "*.md"
+  ]
+}
