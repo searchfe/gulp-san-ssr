@@ -1,5 +1,6 @@
 # gulp-san-ssr
 ![Language](https://img.shields.io/badge/-TypeScript-blue.svg)
+[![Build Status](https://travis-ci.org/searchfe/gulp-san-ssr.svg?branch=master)](https://travis-ci.org/searchfe/gulp-san-ssr)
 [![npm package](https://img.shields.io/npm/v/gulp-san-ssr.svg)](https://www.npmjs.org/package/gulp-san-ssr)
 [![npm downloads](http://img.shields.io/npm/dm/gulp-san-ssr.svg)](https://www.npmjs.org/package/gulp-san-ssr)
 
