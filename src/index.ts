@@ -1,7 +1,7 @@
 import { extname } from 'path';
-import * as PluginError from 'plugin-error';
 import { ToJSCompiler, ToPHPCompiler } from 'san-ssr';
-import through2 from 'through2';
+import PluginError = require('plugin-error');
+import through2 = require('through2');
 
 interface SSROptions {
     [key: string]: string;
