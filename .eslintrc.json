@@ -8,10 +8,8 @@
   },
   "parser": "@typescript-eslint/parser",
   "plugins": [
-    "jest",
     "import",
     "node",
-    "promise",
     "standard",
     "@typescript-eslint"
   ],
