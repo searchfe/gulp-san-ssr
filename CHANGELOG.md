@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/searchfe/gulp-san-ssr/compare/v1.0.1...v1.1.0) (2019-10-29)
+
+
+### Features
+
+* nsPrefix as a function accepts the file obj ([520f538](https://github.com/searchfe/gulp-san-ssr/commit/520f538f27b9df6121367809fb68b336490e8e62))
+
 ## [1.0.1](https://github.com/searchfe/gulp-san-ssr/compare/v1.0.0...v1.0.1) (2019-10-25)
 
 
