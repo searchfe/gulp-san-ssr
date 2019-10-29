@@ -23,3 +23,5 @@ coverage/
 mydev*
 /debug/
 *.local.md
+
+demo/dist

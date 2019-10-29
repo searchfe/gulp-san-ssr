@@ -3,13 +3,20 @@ import { ToJSCompiler, ToPHPCompiler } from 'san-ssr';
 import PluginError = require('plugin-error');
 import through2 = require('through2');
 
-interface SSROptions {
-    [key: string]: string;
+enum Target {
+    php = 'php',
+    js = 'js'
+}
+
+interface Options {
+    tsConfigFilePath?: string;
+    target: Target;
+    nsPrefix?: (file: any) => string | string;
 }
 
 const PLUGIN_NAME = 'gulp-san-ssr';
 
-export function sanssr(options: SSROptions = {}) {
+export function sanssr(options: Options = { target: Target.php }) {
     return through2.obj(function(file, _, cb) {
         if (file.isNull()) {
             this.emit('error', new PluginError(PLUGIN_NAME, 'File: "' + file.relative + '" without content. You have to read it with gulp.src(..)'));
@@ -23,7 +30,13 @@ export function sanssr(options: SSROptions = {}) {
         }
 
         if (file.isBuffer()) {
-            const targetCode = compile(file, options.target, options);
+            const nsPrefix = typeof options.nsPrefix === 'function'
+                ? options.nsPrefix(file)
+                : options.nsPrefix;
+            const targetCode = compile(file, options.target, {
+                nsPrefix,
+                tsConfigFilePath: options.tsConfigFilePath
+            });
             file.contents = Buffer.from(targetCode);
             const path = file.path;
             const ext = extname(path);
