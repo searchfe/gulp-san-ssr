@@ -1,7 +1,8 @@
 import { extname } from 'path';
-import { ToJSCompiler, ToPHPCompiler } from 'san-ssr';
+import { SanProject } from 'san-ssr';
 import PluginError = require('plugin-error');
 import through2 = require('through2');
+
 
 enum Target {
     php = 'php',
@@ -12,6 +13,7 @@ interface Options {
     tsConfigFilePath?: string;
     target: Target;
     nsPrefix?: (file: any) => string | string;
+    modules?: object;
 }
 
 const PLUGIN_NAME = 'gulp-san-ssr';
@@ -35,7 +37,8 @@ export function sanssr(options: Options = { target: Target.php }) {
                 : options.nsPrefix;
             const targetCode = compile(file, options.target, {
                 nsPrefix,
-                tsConfigFilePath: options.tsConfigFilePath
+                tsConfigFilePath: options.tsConfigFilePath,
+                modules: options.modules
             });
             file.contents = Buffer.from(targetCode);
             const path = file.path;
@@ -48,8 +51,9 @@ export function sanssr(options: Options = { target: Target.php }) {
 }
 
 function compile(file, target, ssrOptions) {
-    const Compiler = target === 'php' ? ToPHPCompiler : ToJSCompiler;
-    const compiler = new Compiler(ssrOptions);
-    const targetCode = compiler.compile(file.path, ssrOptions);
+    const project = new SanProject({
+        tsConfigFilePath: ssrOptions.tsConfigFilePath
+    });
+    const targetCode = project.compile(file.path, target, ssrOptions);
     return targetCode;
 }
