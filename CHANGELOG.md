@@ -1,3 +1,13 @@
+# [1.2.0](https://github.com/searchfe/gulp-san-ssr/compare/v1.1.0...v1.2.0) (2019-11-06)
+
+
+### Features
+
+* update san-ssr usage ([c516448](https://github.com/searchfe/gulp-san-ssr/commit/c516448c1cb8acb0d5ecc755b0da50c761b92c26))
+* update san-ssr usage ([4f3153e](https://github.com/searchfe/gulp-san-ssr/commit/4f3153efd71f9a97e17876886d0d0be39aa3e4b5))
+* update san-ssr usage ([0bce94f](https://github.com/searchfe/gulp-san-ssr/commit/0bce94f020cc94f7e0584f45371ac56266b8d962))
+* update san-ssr usage ([47a189d](https://github.com/searchfe/gulp-san-ssr/commit/47a189d5d08e90f92834ec1e0ec4b670b319d9bb))
+
 # [1.1.0](https://github.com/searchfe/gulp-san-ssr/compare/v1.0.1...v1.1.0) (2019-10-29)
 
 
