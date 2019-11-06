@@ -1,6 +1,5 @@
 import { extname } from 'path';
-import { ToJSCompiler, ToPHPCompiler } from 'san-ssr';
-import { Project } from 'ts-morph';
+import { SanProject } from 'san-ssr';
 import PluginError = require('plugin-error');
 import through2 = require('through2');
 
@@ -52,10 +51,9 @@ export function sanssr(options: Options = { target: Target.php }) {
 }
 
 function compile(file, target, ssrOptions) {
-    const Compiler = target === 'php' ? ToPHPCompiler : ToJSCompiler;
-    const tsConfigFilePath = ssrOptions.tsConfigFilePath;
-    const project = new Project({ tsConfigFilePath });
-    const compiler = new Compiler({project, tsConfigFilePath});
-    const targetCode = compiler.compile(file.path, ssrOptions);
+    const project = new SanProject({
+        tsConfigFilePath: ssrOptions.tsConfigFilePath
+    });
+    const targetCode = project.compile(file.path, target, ssrOptions);
     return targetCode;
 }
