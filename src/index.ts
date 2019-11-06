@@ -3,7 +3,6 @@ import { SanProject } from 'san-ssr';
 import PluginError = require('plugin-error');
 import through2 = require('through2');
 
-
 enum Target {
     php = 'php',
     js = 'js'
@@ -53,7 +52,7 @@ export function sanssr(options: Options = { target: Target.php }) {
 function compile(file, target, ssrOptions) {
     const project = new SanProject({
         tsConfigFilePath: ssrOptions.tsConfigFilePath
-    }); 
+    });
     const targetCode = project.compile(file.path, target, ssrOptions);
     return targetCode;
 }
