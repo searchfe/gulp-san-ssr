@@ -12,6 +12,7 @@ interface Options {
     tsConfigFilePath?: string;
     target: Target;
     nsPrefix?: (file: any) => string | string;
+    fakeModules?: object;
     modules?: object;
 }
 
@@ -51,8 +52,12 @@ export function sanssr(options: Options = { target: Target.php }) {
 
 function compile(file, target, ssrOptions) {
     const project = new SanProject({
-        tsConfigFilePath: ssrOptions.tsConfigFilePath
+        tsConfigFilePath: ssrOptions.tsConfigFilePath,
+        modules: ssrOptions.fakeModules
     });
+
+    delete ssrOptions.fakeModules;
+
     const targetCode = project.compile(file.path, target, ssrOptions);
     return targetCode;
 }
