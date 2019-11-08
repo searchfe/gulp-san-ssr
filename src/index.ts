@@ -38,6 +38,7 @@ export function sanssr(options: Options = { target: Target.php }) {
             const targetCode = compile(file, options.target, {
                 nsPrefix,
                 tsConfigFilePath: options.tsConfigFilePath,
+                fakeModules: options.fakeModules,
                 modules: options.modules
             });
             file.contents = Buffer.from(targetCode);
