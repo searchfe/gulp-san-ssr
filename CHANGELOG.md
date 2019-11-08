@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/searchfe/gulp-san-ssr/compare/v1.2.0...v1.3.0) (2019-11-08)
+
+
+### Features
+
+* add fakeModules & update san-ssr ([4b9aa8c](https://github.com/searchfe/gulp-san-ssr/commit/4b9aa8c99a9430ae34f3b0137871821b35a8ae2c))
+
 # [1.2.0](https://github.com/searchfe/gulp-san-ssr/compare/v1.1.0...v1.2.0) (2019-11-06)
 
 
