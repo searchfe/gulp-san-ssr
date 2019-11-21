@@ -1,3 +1,10 @@
+## [1.3.2](https://github.com/searchfe/gulp-san-ssr/compare/v1.3.1...v1.3.2) (2019-11-21)
+
+
+### Bug Fixes
+
+* support san-ssr@1.3.9 ([562505e](https://github.com/searchfe/gulp-san-ssr/commit/562505e6108fbb5bd3f862d7ad0c679295d0c973))
+
 ## [1.3.1](https://github.com/searchfe/gulp-san-ssr/compare/v1.3.0...v1.3.1) (2019-11-08)
 
 
