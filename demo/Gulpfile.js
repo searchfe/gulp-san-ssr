@@ -2,10 +2,11 @@ const { src, dest, parallel } = require('gulp');
 const { sanssr } = require('..');
 const { extname, basename } = require('path');
 
+const sanTransform = sanssr();
+
 function php () {
     return src('san.ts')
-        .pipe(sanssr({
-            target: 'php',
+        .pipe(sanTransform('php', {
             nsPrefix: file => {
                 const ext = extname(file.path);
                 const base = basename(file.path);
@@ -18,7 +19,7 @@ function php () {
 
 function js () {
     return src('san.ts')
-        .pipe(sanssr({ target: 'js' }))
+        .pipe(sanTransform('js'))
         .pipe(dest('dist'));
 }
 

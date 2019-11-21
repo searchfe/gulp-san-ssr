@@ -1,64 +1,48 @@
 import { extname } from 'path';
+import ToPHPCompiler from 'san-ssr-target-php';
 import { SanProject } from 'san-ssr';
 import PluginError = require('plugin-error');
 import through2 = require('through2');
 
-enum Target {
-    php = 'php',
-    js = 'js'
-}
-
-interface Options {
-    tsConfigFilePath?: string;
-    target: Target;
-    nsPrefix?: (file: any) => string | string;
-    fakeModules?: object;
-    modules?: object;
-}
-
 const PLUGIN_NAME = 'gulp-san-ssr';
 
-export function sanssr(options: Options = { target: Target.php }) {
-    return through2.obj(function(file, _, cb) {
-        if (file.isNull()) {
-            this.emit('error', new PluginError(PLUGIN_NAME, 'File: "' + file.relative + '" without content. You have to read it with gulp.src(..)'));
-            return;
-        }
+export function sanssr(options) {
+    const project = new SanProject(options);
 
-        if (file.isStream()) {
-            this.emit('error', new PluginError(PLUGIN_NAME, 'Streaming not supported'));
-            cb();
-            return;
+    return function (target, options) {
+        const outfileExtname = '.' + target;
+        if (target === 'php') {
+            target = ToPHPCompiler;
         }
-
-        if (file.isBuffer()) {
+        options = options || {};
+        return through2.obj(function (file, _, cb) {
             const nsPrefix = typeof options.nsPrefix === 'function'
                 ? options.nsPrefix(file)
                 : options.nsPrefix;
-            const targetCode = compile(file, options.target, {
-                nsPrefix,
-                tsConfigFilePath: options.tsConfigFilePath,
-                fakeModules: options.fakeModules,
-                modules: options.modules
-            });
-            file.contents = Buffer.from(targetCode);
-            const path = file.path;
-            const ext = extname(path);
-            file.path = path.substr(0, path.length - ext.length) + '.' + options.target;
-        }
 
-        cb(null, file);
-    });
-}
+            if (file.isNull()) {
+                this.emit('error', new PluginError(PLUGIN_NAME, 'File: "' + file.relative + '" without content. You have to read it with gulp.src(..)'));
+                return;
+            }
 
-function compile(file, target, ssrOptions) {
-    const project = new SanProject({
-        tsConfigFilePath: ssrOptions.tsConfigFilePath,
-        modules: ssrOptions.fakeModules
-    });
+            if (file.isStream()) {
+                this.emit('error', new PluginError(PLUGIN_NAME, 'Streaming not supported'));
+                cb();
+                return;
+            }
 
-    delete ssrOptions.fakeModules;
+            if (file.isBuffer()) {
+                const targetCode = project.compile(file.path, target, {
+                    ...options, nsPrefix
+                });
 
-    const targetCode = project.compile(file.path, target, ssrOptions);
-    return targetCode;
+                file.contents = Buffer.from(targetCode);
+                const path = file.path;
+                const ext = extname(path);
+                file.path = path.substr(0, path.length - ext.length) + outfileExtname;
+            }
+
+            cb(null, file);
+        });
+    };
 }
